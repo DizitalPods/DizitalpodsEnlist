@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Details</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+
+</script>
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+
+</script>
+
+<!-- Include Dexie -->
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+<style>
+.update_form {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.buttons {
+text-align: center;
+margin-top: 15px;
+}
+</style>
+
+
+<script>
+$.ajax({
+url : "/candidate",
+success : function(data) {
+var select = '';
+$.each(data, function(key, value) {
+select += '<option val=' + value.cno + ' id="opsn">'
++ value.cno + '</option>';
+console.log(value.cno);
+})
+$('#id').html(select);
+},
+
+type : 'GET',
+});
+function EditInfo() {
+$.ajax({
+url : "/candidate/" + $("#id").val(),
+type : 'GET',
+success : function(data) {
+console.log(data);
+$('#cno').val(data.cno);
+$('#fname').val(data.fname);
+$('#lname').val(data.lname);
+$('#pno').val(data.pno);
+$('#alternatepno').val(data.alternatepno);
+$('#email').val(data.email);
+$('#techskills').val(data.techskills);
+$('#otherskills').val(data.otherskills);
+$('#totalexp').val(data.totalexp);
+$('#prevorgs').val(data.prevorgs);
+$('#summary').val(data.summary);
+$('#naukariid').val(data.naukariid);
+$('#linkedinid').val(data.linkedinid);
+$('#source').val(data.source);
+$('#createdby').val(data.createdby);
+$('#createdon').val(data.createdon);
+$('#updatedon').val(data.updatedon);
+$('#updatedby').val(data.updatedby);
+$('#lockedstatus').val(data.lockedstatus);
+}
+})
+}
+</script>
+
+
+</head>
+
+<body>
+
+<label class="form-label">Enter CandidateNo</label>
+<select id="id" class="form-control">
+
+</select>
+<button type="button" onclick="EditInfo();"
+class="btn btn-warning" >Get Details</button>
+<div class="update_form">
+<div class="form-group col-md-6">
+Candidate no: <input type="text" id="cno" class="form-control" disabled>
+Full Name: <input type="text" id="fname" class="form-control">
+Last Name: <input type="text" id="lname" class="form-control">
+Phone: <input type="text" id="pno" class="form-control">
+Alternate phone: <input type="text" id="alternatepno" class="form-control">
+Email: <input type="email" id="email" class="form-control">
+Technical Skills: <input type="text" id="techskills" class="form-control">
+Other Skills: <input type="text" id="otherskills"class="form-control">
+Total Experience: <input type="text" id="totalexp" class="form-control">
+Previous Work Experience: <input type="text" id="prevorgs" class="form-control">
+Summary: <input type="text" id="summary" class="form-control">
+
+Naukri Id: <input type="text" id="naukariid" class="form-control">
+
+Linkedin: <input type="text" id="linkedinid" class="form-control">
+Source: <input type="text" id="source" class="form-control">
+Created on: <input type="date" id="createdon" class="form-control">
+Created by: <input type="text" id="createdby" class="form-control">
+Updated on: <input type="date" id="updatedon" class="form-control">
+Updated by: <input type="text" id="updatedby" class="form-control">
+Locked Status: <input type="text" id="lockedstatus" class="form-control">
+<div class="buttons">
+<button onclick="save();" class="btn btn-warning">Update</button>
+<button onclick="doconfirm();" class="btn btn-danger">Delete</button>
+</div>
+</div>
+</div>
+
+
+<script>
+function save() {
+var data = {}
+data["cno"] = $("#cno").val();
+data["fname"] = $("#fname").val();
+data["lname"] = $("#lname").val();
+data["pno"] = $("#pno").val();
+data["alternatepno"] = $("#alternatepno").val();
+data["email"] = $("#email").val();
+data["techskills"] = $("#techskills").val();
+data["otherskills"] = $("#otherskills").val();
+data["totalexp"] = $("#totalexp").val();
+data["prevorgs"] = $("#prevorgs").val();
+data["summary"] = $("#summary").val();
+data["naukariid"] = $("#naukariid").val();
+data["linkedinid"] = $("#linkedinid").val();
+data["source"] = $("#source").val();
+data["createdon"] = $("#createdon").val();
+data["createdby"] = $("#createdby").val();
+data["updatedon"] = $("#updatedon").val();
+data["updatedby"] = $("#updatedby").val();
+data["lockedstatus"] = $("#lockedstatus").val();
+
+$.ajax({
+url : "/candidate/" + $("#id").val(),
+contentType : "application/json",
+data : JSON.stringify(data),
+type : "PUT",
+success : function(data) {
+
+window.location.href = '/CandidateDisplay';
+alert("Updated Successfully" + data);
+
+},
+error : function(e) {
+alert('error', e);
+}
+});
+}
+
+function doconfirm() {
+var c = confirm("are you sure to delete the record?");
+if (c == true) {
+$.ajax({
+type : 'DELETE',
+url : "/candidate/" + $("#id").val(),
+contentType : "application/json",
+success : function(response, status) {
+window.location.href = "/CandidateDisplay";
+alert("Successfully Deleted")
+console.log(status);
+}
+})
+}
+}
+</script>
+
+
+</body>
+
+</html>

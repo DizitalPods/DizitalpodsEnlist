@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Details</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	
+</script>
+
+<!-- Include Dexie -->
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+<style>
+.update_form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttons {
+	text-align: center;
+	margin-top: 15px;
+}
+</style>
+
+
+<script>
+
+/* $.ajax({
+	url : "/candidate",
+	success : function(data) {
+		var select = '';
+		$.each(data, function(key, value) {
+			select += '<option val=' + value.cno + ' id="opsn">'
+					+ value.cno + '</option>';
+			console.log(value.cno);
+		})
+		$('#cno1').html(select);
+	},
+
+	type : 'GET',
+});
+
+
+$.ajax({
+	url : "/",
+	success : function(data) {
+		var select = '';
+		$.each(data, function(key, value) {
+			select += '<option val=' + value.jobid + ' id="opsn">'
+					+ value.jobid + '</option>';
+			console.log(value.jobid);
+		})
+		$('#jobid').html(select);
+	},
+
+	type : 'GET',
+}); */
+
+
+
+
+
+
+	$.ajax({
+		url : "/lockcandidate",
+		success : function(data) {
+			var select = '';
+			$.each(data, function(key, value) {
+				select += '<option val=' + value.lock_id + ' id="opsn">'
+						+ value.lock_id + '</option>';
+				console.log(value.lock_id);
+			})
+			$('#id').html(select);
+		},
+
+		type : 'GET',
+	});
+	function EditInfo() {
+		$.ajax({
+			url : "/lockcandidate/" + $("#id").val(),
+			type : 'GET',
+			success : function(data) {
+				console.log(data);
+				$('#lock_id').val(data.lock_id);
+				$('#cno').val(data.cno);
+				$('#jobid').val(data.jobid);
+				$('#lockedon').val(data.lockedon);
+				$('#lockedby').val(data.lockedby);
+				$('#lockreleasedon').val(data.lockreleasedon);
+				$('#lockreleasedby').val(data.lockreleasedby);
+
+			}
+		})
+	}
+</script>
+<script>
+	function save() {
+		var data = {}
+		data["lock_id"] = $("#lock_id").val();
+		data["cno"] = $("#cno").val();
+		data["jobid"] = $("#jobid").val();
+		data["lockedon"] = $("#lockedon").val();
+		data["lockedby"] = $("#lockedby").val();
+		data["lockreleasedon"] = $("#lockreleasedon").val();
+		data["lockreleasedby"] = $("#lockreleasedby").val();
+		
+		$.ajax({
+			url : "/lockcandidate/" + $("#lock_id").val(),
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			type : "PUT",
+			success : function(data) {
+				window.location.href = '/LockCandidateDisplay';
+				alert("Updated Successfully" + data);
+
+			},
+			error : function(e) {
+				alert('error', e);
+			}
+		});
+	}
+
+	function doconfirm() {
+		var c = confirm("are you sure to delete the record?");
+		if (c == true) {
+			$.ajax({
+				type : 'DELETE',
+				url : "/lockcandidate/" + $("#id").val(),
+				contentType : "application/json",
+				success : function(response, status) {
+					window.location.href = "/LockCandidateDisplay";
+					alert("successfully Deleted")
+					console.log(status);
+				}
+			})
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+	<label class="form-label">Enter Lock ID</label>
+	<select id="id" class="form-control">
+
+	</select>
+	<button type="button" onclick="EditInfo();"
+		class="btn btn-warning">Update Job id</button>
+	<div class="update_form">
+		<div class="form-group col-md-6">
+			Lock-id <input type="text" id="lock_id" class="form-control" disabled>
+			Candidate No: <input id="cno" class="form-control" disabled>
+			Job Id:<input id="jobid" class="form-control" disabled>
+			Locked On: <input type="date" id="lockedon" class="form-control">
+			Locked By: <input type="text" id="lockedby" class="form-control"> 
+			Released On: <input type="date" value = "#lockreleasedon" id="lockreleasedon" class="form-control"> 
+			Released By: <input type="text" id="lockreleasedby" class="form-control"> 
+
+			<div class="buttons">
+				<button onclick="save();" class="btn btn-warning">Update</button>
+				<button onclick="doconfirm()" class="btn btn-danger">Delete</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

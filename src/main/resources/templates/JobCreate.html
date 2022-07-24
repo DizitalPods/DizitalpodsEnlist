@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Create Job Detail</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script>
+		function save() {
+			var data = {}
+
+			data["jobtitle"] = $("#jobtitle").val();
+			data["domain"] = $("#domain").val();
+			data["role"] = $("#role").val();
+			data["client"] = $("#client").val();
+			data["techskills"] = $("#techskills").val();
+			data["exprange"] = $("#exprange").val();
+			data["jobtype"] = $("#jobtype").val();
+			data["jobdesc"] = $("#jobdesc").val();
+			data["salaryrange"] = $("#salaryrange").val();
+			data["openpositions"] = $("#openpositions").val();
+			data["joinedby"] = $("#joinedby").val();
+			data["createdby"] = $("#createdby").val();
+			data["createdon"] = $("#createdon").val();
+			data["assignedon"] = $("#assignedon").val();
+			data["assignedby"] = $("#assignedby").val();
+
+			$.ajax({
+				url: "/",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				type: "post",
+				success: function (data) {
+
+					window.location.href = '/JobDisplay';
+					alert("Inserted Successfully" + data);
+
+				},
+				error: function (e) {
+					alert('error', e);
+				}
+			});
+		}
+
+
+	</script>
+
+	<style>
+		input {
+			margin:5px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<main>
+
+		<div class="form-group col-md-4">
+			<!-- <input type="text" id="slno"> -->
+			Job Title: <input type="text" id="jobtitle" class="form-control">
+			Domain: <input type="text" id="domain" class="form-control">
+			Role: <input type="text" id="role" class="form-control">
+			Client: <input type="text" id="client" class="form-control">
+			Technical Skills: <input type="text" id="techskills" class="form-control">
+			Experience: <input type="text" id="exprange" class="form-control">
+			Job Type: <input type="text" id="jobtype" class="form-control">
+			Job Description: <input type="text" id="jobdesc" class="form-control">
+			Salary Range: <input type="text" id="salaryrange" class="form-control">
+			Open Positions: <input type="text" id="openpositions" class="form-control">
+			Join by: <input type="text" id="joinedby" class="form-control">
+			Created by: <input type="text" id="createdby" class="form-control">
+			Created on: <input type="date" id="createdon" class="form-control">
+			Assigned on: <input type="date" id="assignedon" class="form-control">
+			Assigned by: <input type="text" id="assignedby" class="form-control">
+			<input type="submit" value="Add" onclick="save();" class="btn btn-success">
+		</div>
+	</main>
+
+	<!-- Labels -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+		</script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+		</script>
+
+	<!-- Include Dexie -->
+	<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+</body>
+
+</html>

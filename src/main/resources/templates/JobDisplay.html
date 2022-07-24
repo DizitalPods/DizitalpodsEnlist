@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Display </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+      GetBindData()
+  });
+function GetBindData() {
+      $.ajax({
+          url: '/',
+          method: 'GET',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (result)
+          {
+              //after successfully call bind data to Table
+              BindDataWithJqueyEach(result);
+          },
+          fail: function (jqXHR, textStatus) {
+              alert("Request failed: " + textStatus);
+          }
+      })
+  }
+   
+  function BindDataWithJqueyEach(data)
+  {
+      jQuery.each(data, function (i, val) {
+          var tablerow = "<tr>"
+                           + "<td>" + val.jobid + "</td>"
+                           + "<td>" + val.jobtitle + "</td>"
+                           + "<td>" + val.domain + "</td>"
+                           + "<td>" + val.role + "</td>"
+                           + "<td>" + val.client + "</td>"
+                           + "<td>" + val.techskills + "</td>"
+                           + "<td>" + val.exprange+ "</td>"
+                           + "<td>" + val.jobtype + "</td>"
+                           + "<td>" + val.jobdesc + "</td>"
+                           + "<td>" + val.salaryrange+ "</td>"
+                           + "<td>" + val.openpositions + "</td>"
+                           + "<td>" + val.joinedby + "</td>"
+                           + "<td>" + val.createdby + "</td>"
+                           + "<td>" + val.createdon + "</td>"
+                           + "<td>" + val.assignedon + "</td>"
+		   				   + "<td>" + val.assignedby + "</td>"
+                           + "</tr>";
+          $("#tbody").append(tablerow);
+      });
+  } 
+ 
+</script>
+     
+</head>
+
+<body>
+  
+    <div class="container-fluid  text-center">
+      
+      <!--  Table -->
+      <div>
+        <table class="table table-bordered" id="myPlacementtable">
+          <thead>
+	            <tr>
+	              <th scope="col">Job Id</th>
+	              <th scope="col">Job Title</th>
+	              <th scope="col">Domain</th>
+	              <th scope="col">Role</th>
+	              <th scope="col">Client</th>
+	              <th scope="col">Technical Skills</th>
+	              <th scope="col">Experience Range</th>
+	              <th scope="col">Job Type</th>
+	              <th scope="col">Job Description</th>
+	              <th scope="col">Salary Range</th>
+	              <th scope="col">Open Positions</th>
+	              <th scope="col">Join by</th>
+	              <th scope="col">Created by</th>
+	              <th scope="col">Created on</th>
+	              <th scope="col">Assigned on</th>
+		 <th scope="col">Assigned by</th>
+	             
+	            </tr>
+          </thead>
+          <tbody id="tbody">  
+                   
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  </script>
+
+  <!-- Include Dexie -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+</body>
+
+</html>

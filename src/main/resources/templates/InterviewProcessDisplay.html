@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Display </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+      GetBindData()
+  });
+function GetBindData() {
+      $.ajax({
+          url: '/interviewprocess',
+          method: 'GET',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (result)
+          {
+              //after successfully call bind data to Table
+              BindDataWithJqueyEach(result);
+          },
+          fail: function (jqXHR, textStatus) {
+              alert("Request failed: " + textStatus);
+          }
+      })
+  }
+   
+  function BindDataWithJqueyEach(data)
+  {
+      jQuery.each(data, function (i, val) {
+          var tablerow = "<tr>"
+        	  			   + "<td>" + val.interviewid + "</td>"                 
+          				   + "<td>" + val.lock_id + "</td>"
+                           + "<td>" + val.stage1 + "</td>"
+                           + "<td>" + val.stage2 + "</td>"
+                           + "<td>" + val.stage3 + "</td>"
+                           + "<td>" + val.i_status + "</td>"
+                           + "</tr>";
+          $("#tbody").append(tablerow);
+      });
+  } 
+ 
+</script>
+     
+</head>
+
+<body>
+  
+    <div class="container-fluid  text-center">
+      
+      <!--  Table -->
+      <div>
+        <table class="table table-bordered" id="myPlacementtable">
+          <thead>
+	            <tr>
+	              <th scope="col">Interview Id</th>
+	              <th scope="col">Lock Id</th>
+	              <th scope="col">Stage 1</th>
+	              <th scope="col">Stage 2</th>
+	              <th scope="col">Stage 3</th>
+	              <th scope="col">Status</th>
+	             
+	            </tr>
+          </thead>
+          <tbody id="tbody">  
+                   
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  </script>
+
+  <!-- Include Dexie -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+</body>
+
+</html>

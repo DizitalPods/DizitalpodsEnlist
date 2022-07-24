@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Details</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	
+</script>
+
+<!-- Include Dexie -->
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+<style>
+.update_form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttons {
+	text-align: center;
+	margin-top: 15px;
+}
+</style>
+
+
+<script>
+	$.ajax({
+		url : "/",
+		success : function(data) {
+			var select = '';
+			$.each(data, function(key, value) {
+				select += '<option val=' + value.jobid + ' id="opsn">'
+						+ value.jobid + '</option>';
+				console.log(value.slno);
+			})
+			$('#id').html(select);
+		},
+
+		type : 'GET',
+	});
+	function EditInfo() {
+		$.ajax({
+			url : "/" + $("#id").val(),
+			type : 'GET',
+			success : function(data) {
+				console.log(data);
+				$('#jobid').val(data.jobid);
+				$('#jobtitle').val(data.jobtitle);
+				$('#domain').val(data.domain);
+				$('#role').val(data.role);
+				$('#client').val(data.client);
+				$('#techskills').val(data.techskills);
+				$('#exprange').val(data.exprange);
+				$('#jobtype').val(data.jobtype);
+				$('#jobdesc').val(data.jobdesc);
+				$('#salaryrange').val(data.salaryrange);
+				$('#openpositions').val(data.openpositions);
+				$('#joinedby').val(data.joinedby);
+				$('#createdby').val(data.createdby);
+				$('#createdon').val(data.createdon);
+				$('#assignedon').val(data.assignedon);
+				$('#assignedby').val(data.assignedby);
+			}
+		})
+	}
+</script>
+<script>
+	function save() {
+		var data = {}
+		data["jobid"] = $("jobid").val();
+		data["jobtitle"] = $("#jobtitle").val();
+		data["domain"] = $("#domain").val();
+		data["role"] = $("#role").val();
+		data["client"] = $("#client").val();
+		data["techskills"] = $("#techskills").val();
+		data["exprange"] = $("#exprange").val();
+		data["jobtype"] = $("#jobtype").val();
+		data["jobdesc"] = $("#jobdesc").val();
+		data["salaryrange"] = $("#salaryrange").val();
+		data["openpositions"] = $("#openpositions").val();
+		data["joinedby"] = $("#joinedby").val();
+		data["createdby"] = $("#createdby").val();
+		data["createdon"] = $("#createdon").val();
+		data["assignedon"] = $("#assignedon").val();
+		data["assignedby"] = $("#assignedby").val();
+
+		$.ajax({
+			url : "/" + $("#id").val(),
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			type : "PUT",
+			success : function(data) {
+
+				window.location.href = '/JobDisplay';
+				alert("Updated Successfully" + data);
+
+			},
+			error : function(e) {
+				alert('error', e);
+			}
+		});
+	}
+
+	function doconfirm() {
+		var c = confirm("are you sure to delete the record?");
+		if (c == true) {
+			$.ajax({
+				type : 'DELETE',
+				url : "/" + $("#id").val(),
+				contentType : "application/json",
+				success : function(response, status) {
+					window.location.href = "/JobDisplay";
+					alert("successfully Deleted")
+					console.log(status);
+				}
+			})
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+	<label class="form-label">Select Job I'd</label>
+	<select id="id" class="form-group">
+
+	</select>
+	<button type="button" onclick="EditInfo();"
+		class="btn btn-warning">Get Job id</button>
+	<div class="update_form">
+		<div class="form-group col-md-6">
+			Job Id: <input type="text" id="jobid" class="form-control" disabled>
+			Job Title: <input type="text" id="jobtitle" class="form-control">
+			Domain: <input type="text" id="domain" class="form-control">
+			Role: <input type="text" id="role" class="form-control">
+			Client: <input type="text" id="client" class="form-control"> 
+			Technical Skills: <input type="text" 	id="techskills" class="form-control"> 
+			Experience: <input type="text" id="exprange" class="form-control"> 
+			Job Type: <input type="text" id="jobtype"class="form-control"> 
+			Job Description: <input type="text" id="jobdesc" class="form-control"> 
+			Salary Range: <input type="text" id="salaryrange" class="form-control"> 
+			Open Positions: <input type="text" id="openpositions" class="form-control"> 
+			Join by: <input type="text" id="joinedby" class="form-control">
+			Created by: <input type="text" id="createdby" class="form-control">
+			Created on: <input type="text" id="createdon" class="form-control"> 
+			Assigned on: <input type="text" id="assignedon" class="form-control">
+			Assigned by: <input type="text"
+				id="assignedby" class="form-control">
+			<div class="buttons">
+				<button onclick="save();" class="btn btn-warning">Update</button>
+				<button onclick="doconfirm()" class="btn btn-danger">Delete</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

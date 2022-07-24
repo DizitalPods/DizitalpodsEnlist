@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Details</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	
+</script>
+
+<!-- Include Dexie -->
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+<style>
+.update_form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttons {
+	text-align: center;
+	margin-top: 15px;
+}
+</style>
+
+
+<script>
+
+$.ajax({
+	url : "/interviewprocess",
+	success : function(data) {
+		var select = '';
+		$.each(data, function(key, value) {
+			select += '<option val=' + value.interviewid + ' id="opsn">'
+					+ value.interviewid + '</option>';
+			console.log(value.interviewid);
+		})
+		$('#id').html(select);
+	},
+
+	type : 'GET',
+});
+
+
+/* $.ajax({
+	url : "/",
+	success : function(data) {
+		var select = '';
+		$.each(data, function(key, value) {
+			select += '<option val=' + value.jobid + ' id="opsn">'
+					+ value.jobid + '</option>';
+			console.log(value.cno);
+		})
+		$('#jobid').html(select);
+	},
+
+	type : 'GET',
+}); */
+
+
+	$.ajax({
+		url : "/lockcandidate",
+		success : function(data) {
+			var select = '';
+			$.each(data, function(key, value) {
+				select += '<option val=' + value.lock_id + ' id="opsn">'
+						+ value.lock_id + '</option>';
+				console.log(value.lock_id);
+			})
+			$('#lock_id').html(select);
+		},
+
+		type : 'GET',
+	}); 
+	
+	function EditInfo() {
+		$.ajax({
+			url : "/interviewprocess/" + $("#id").val(),
+			type : 'GET',
+			success : function(data) {
+				console.log(data);
+				$('#interviewid').val(data.interviewid);
+				$('#lock_id').val(data.lock_id);
+				$('#stage1').val(data.stage1);
+				$('#stage2').val(data.stage2);
+				$('#stage3').val(data.stage3);
+				$('#i_status').val(data.i_status);
+
+			}
+		})
+	}
+</script>
+<script>
+	function save() {
+		var data = {}
+		data["interviewid"] = $("#interviewid").val();
+		data["lock_id"] = $("#lock_id").val();
+		data["stage1"] = $("#stage1").val();
+		data["stage2"] = $("#stage2").val();
+		data["stage3"] = $("#stage3").val();
+		data["i_status"] = $("#i_status").val();
+		
+		$.ajax({
+			url : "/interviewprocess/" + $("#interviewid").val(),
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			type : "PUT",
+			success : function(data) {
+				window.location.href = '/InterviewProcessDisplay';
+				alert("Updated Successfully" + data);
+
+			},
+			error : function(e) {
+				alert('error', e);
+			}
+		});
+	}
+
+	function doconfirm() {
+		var c = confirm("are you sure to delete the record?");
+		if (c == true) {
+			$.ajax({
+				type : 'DELETE',
+				url : "/interviewprocess" + $("#id").val(),
+				contentType : "application/json",
+				success : function(response, status) {
+					window.location.href = "/InterviewProcessDisplay";
+					alert("successfully Deleted")
+					console.log(status);
+				}
+			})
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+	<label class="form-label">Select Interview Id</label>
+	<select id="id" class="form-control">
+
+	</select>
+	<button type="button" onclick="EditInfo();"
+		class="btn btn-warning">Update info</button>
+	<div class="update_form">
+		<div class="form-group col-md-6">
+			Interview Id <input type="text" id="interviewid" class="form-control" disabled>
+			Lock Id: <select id="lock_id" class="form-control">
+				<option id="lock_id" value="#lock_id"></option>
+			</select>
+			Stage 1:<select id="stage1" class="form-control">
+			<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Stage 2: <select  id="stage2" class="form-control">
+			<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Stage 3: <select  id="stage3" class="form-control"> 
+			<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Status: <select id="i_status" class="form-control"> 
+				<option value="selected">Selected</option>
+				<option value="onhold">on hold</option>
+				<option value="rejected">Rejected</option>
+				</select>
+
+			<div class="buttons">
+				<button onclick="save();" class="btn btn-warning">Update</button>
+				<button onclick="doconfirm()" class="btn btn-danger">Delete</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Add Candidate Detail</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+	<script>
+	
+	$.ajax({
+		url : "/lockcandidate",
+		success : function(data) {
+			var select = '';
+			$.each(data, function(key, value) {
+				select += '<option val=' + value.lock_id + ' id="opsn">'
+						+ value.lock_id + '</option>';
+				console.log(value.lock_id);
+			})
+			$('#lock_id').html(select);
+		},
+
+		type : 'GET',
+	});
+	
+	
+	
+	
+		function save() {
+			var data = {}
+
+			data["interviewid"] = $("#interviewid").val();
+			data["lock_id"] = $("#lock_id").val();
+			data["stage1"] = $("#stage1").val();
+			data["stage2"] = $("#stage2").val();
+			data["stage3"] = $("#stage3").val();
+			data["i_status"] = $("#i_status").val();
+
+			$.ajax({
+				url: "/interviewprocess",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				type: "post",
+				success: function (data) {
+
+					window.location.href = '/InterviewProcessDisplay';
+					alert("Inserted Successfully" + data);
+
+				},
+				error: function (e) {
+					alert('error', e);
+				}
+			});
+		}
+
+
+	</script>
+
+	<style>
+		input {
+			margin:5px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<main>
+
+		<div class="form-group col-md-4">
+			<!-- <input type="text" id="slno"> -->
+			Lock Id: <select id="lock_id" class="form-control"></select>
+			Stage 1: <select id="stage1" class="form-control">
+				<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Stage 2:  <select id="stage2" class="form-control">
+				<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Stage 3:  <select id="stage3" class="form-control">
+				<option value="Passed">cleared</option>
+				<option value="on_hold">on hold</option>
+				<option value="not_cleared">not cleared</option>
+			</select>
+			Status:  <select id="i_status" class="form-control">
+				<option value="selected">Selected</option>
+				<option value="onhold">on hold</option>
+				<option value="rejected">Rejected</option>
+			</select>
+
+			<input type="submit" value="Add" onclick="save();" class="btn btn-success">
+		</div>
+	</main>
+
+	<!-- Labels -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+		</script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+		</script>
+
+	<!-- Include Dexie -->
+	<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+
+</body>
+
+</html>

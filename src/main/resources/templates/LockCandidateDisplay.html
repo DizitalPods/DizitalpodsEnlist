@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Display </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+      GetBindData()
+  });
+function GetBindData() {
+      $.ajax({
+          url: '/lockcandidate',
+          method: 'GET',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (result)
+          {
+              //after successfully call bind data to Table
+              BindDataWithJqueyEach(result);
+          },
+          fail: function (jqXHR, textStatus) {
+              alert("Request failed: " + textStatus);
+          }
+      })
+  }
+   
+  function BindDataWithJqueyEach(data)
+  {
+      jQuery.each(data, function (i, val) {
+          var tablerow = "<tr>"
+        	  			   + "<td>" + val.lock_id + "</td>"                 
+          				   + "<td>" + val.cno + "</td>"
+                           + "<td>" + val.jobid + "</td>"
+                           + "<td>" + val.lockedon + "</td>"
+                           + "<td>" + val.lockedby + "</td>"
+                           + "<td>" + val.lockreleasedon + "</td>"
+                           + "<td>" + val.lockreleasedby + "</td>"
+                           + "</tr>";
+          $("#tbody").append(tablerow);
+      });
+  } 
+ 
+</script>
+     
+</head>
+
+<body>
+  
+    <div class="container-fluid  text-center">
+      
+      <!--  Table -->
+      <div>
+        <table class="table table-bordered" id="myPlacementtable">
+          <thead>
+	            <tr>
+	              <th scope="col">Lock Id</th>
+	              <th scope="col">Candidate no</th>
+	              <th scope="col">Job Id</th>
+	              <th scope="col">Locked on</th>
+	              <th scope="col">Locked by</th>
+	              <th scope="col">Lock Released on</th>
+	              <th scope="col">Lock Released by</th>
+	             
+	            </tr>
+          </thead>
+          <tbody id="tbody">  
+                   
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  </script>
+
+  <!-- Include Dexie -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+</body>
+
+</html>
