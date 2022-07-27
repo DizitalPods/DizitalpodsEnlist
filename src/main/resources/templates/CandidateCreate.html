@@ -12,27 +12,45 @@
 
 
 	<script>
+	
+	$.ajax({
+		url : "/ljc/y",
+		success : function(data) {
+			
+			var select = '';
+			$.each(data, function() {
+				select += '<option val=' + data + ' id="opsn">'
+						+ data + '</option>';
+				
+				console.log(data);
+			})
+			$('#ls').html(select);
+		},
+
+		type : 'GET',
+	});
+	
 		function save() {
 			var data = {}
 
 			data["fname"] = $("#fname").val();
 			data["lname"] = $("#lname").val();
 			data["pno"] = $("#pno").val();
-			data["alternatepno"] = $("#alternatepno").val();
+			
 			data["email"] = $("#email").val();
 			data["techskills"] = $("#techskills").val();
-			data["otherskills"] = $("#otherskills").val();
+			
 			data["totalexp"] = $("#totalexp").val();
-			data["prevorgs"] = $("#prevorgs").val();
-			data["summary"] = $("#summary").val();
-			data["naukariid"] = $("#naukariid").val();
+			
+			
 			data["linkedinid"] = $("#linkedinid").val();
 			data["source"] = $("#source").val();
 			data["createdby"] = $("#createdby").val();
 			data["createdon"] = $("#createdon").val();
 			data["updatedon"] = $("#updatedon").val();
 			data["updatedby"] = $("#updatedby").val();
-			data["lockedstatus"] = $("#lockedstatus").val();
+			data["status"]=$("#ls").val();
+			
 
 			$.ajax({
 				url: "/candidate",
@@ -70,26 +88,25 @@
 			Full Name: <input type="text" id="fname" class="form-control">
 			Last Name: <input type="text" id="lname" class="form-control">
 			Phone: <input type="text" id="pno" class="form-control">
-			Alternate phone: <input type="text" id="alternatepno" class="form-control">
 			Email: <input type="text" id="email" class="form-control">
 			Technical Skills: <input type="text" id="techskills" class="form-control">
-			Other Skills: <input type="text" id="otherskills" class="form-control">
+			
 			Total Experience: <input type="text" id="totalexp" class="form-control">
-			Previous Work Experience: <input type="text" id="prevorgs" class="form-control">
-			Summary: <input type="text" id="summary" class="form-control">
-			Naukri Id: <input type="text" id="naukariid" class="form-control">
+			
+			
+			
 			Linkedin: <input type="text" id="linkedinid" class="form-control">
-			Source: <input type="text" id="source" class="form-control">
+			
 			Created on: <input type="date" id="createdon" class="form-control">
 			Created by: <input type="text" id="createdby" class="form-control">
 			Updated on: <input type="date" id="updatedon" class="form-control">
 			Updated by: <input type="text" id="updatedby" class="form-control">
-			Locked Status: <input type="text" id="lockedstatus" class="form-control">
+			Test: <select id="ls"  class="form-control"></select>
 			
 			
 			<form  method="post" action="/upload" enctype="multipart/form-data">
     
-                        <input name="f" type="file" />
+                        <input name="fi" type="file" />
                         
                         <input type="submit"  value="Uploading">
                         

@@ -12,7 +12,19 @@ public class LockCandidateDomain {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long lock_id;
+
 private long cno;
+
+private long jobid;
+
+public long getJobid() {
+	return jobid;
+}
+
+public void setJobid(long jobid) {
+	this.jobid = jobid;
+}
+
 public long getCno() {
 	return cno;
 }
@@ -22,6 +34,8 @@ public void setCno(long cno) {
 }
 
 private String lock_status;
+
+
 private String lockedon;
 private String lockedby;
 private String lockreleasedon;

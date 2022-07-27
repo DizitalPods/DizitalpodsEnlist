@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.ems.jobdetails.domain.CandidateDetailsDomain;
+import com.project.ems.jobdetails.domain.LockCandidateDomain;
 import com.project.ems.jobdetails.service.CandidateDetailsService;
+import com.project.ems.jobdetails.service.LockCandidateService;
 
 @RestController
 public class CandidateDetailsController {
 	@Autowired
 	private CandidateDetailsService service;
+	@Autowired
+	private LockCandidateService lservice;
 	
 	@GetMapping("/candidate")
 	public ResponseEntity<List<CandidateDetailsDomain> >listAll()
@@ -35,6 +39,11 @@ public class CandidateDetailsController {
 		return new ResponseEntity<CandidateDetailsDomain>(service.get(cno),HttpStatus.OK);
 	}
 	
+	@GetMapping("/lockcandidate")
+	public List<LockCandidateDomain> getAll()
+	{
+		return lservice.listAll();
+	}
 	@PostMapping("/candidate")
 	public ResponseEntity<String> addDetails(@RequestBody CandidateDetailsDomain cd)
 	{
@@ -42,7 +51,7 @@ public class CandidateDetailsController {
 		
 		if(b)
 		{
-                 return new ResponseEntity<String>("success",HttpStatus.OK);
+              return new ResponseEntity<String>("success",HttpStatus.OK);
 		}
 		else{
                  return new ResponseEntity<String>("failure",HttpStatus.OK);
@@ -50,20 +59,19 @@ public class CandidateDetailsController {
 	}
 	
 	@PutMapping(value="/candidate/{cno}")
-	public ResponseEntity<String> editCandidateDetails(@RequestBody CandidateDetailsDomain newCandidateDetails, @PathVariable long cno)
+	public ResponseEntity<CandidateDetailsDomain> editCandidateDetails(@PathVariable long cno)
 	{
 		
 		
-		boolean b=service.editCandidateDetails(newCandidateDetails,cno);
+		CandidateDetailsDomain editCandidateDetails = service.editCandidateDetails(cno);
 
            
-		if(b)
-		{
-                 return new ResponseEntity<String>("success",HttpStatus.OK);
-		}
-		else{
-                 return new ResponseEntity<String>("failure",HttpStatus.OK);
-		}
+
+        return new ResponseEntity<CandidateDetailsDomain>(editCandidateDetails,HttpStatus.OK);
+		
+
+              
+		
 		
 		
 		

@@ -17,11 +17,14 @@ public class InterviewProcessDomain {
 	private String stage2;
 	private String stage3;
 	private String i_status;
-	public InterviewProcessDomain() {
+	
+	public InterviewProcessDomain() 
+	{
 		super();
 	}
 	public InterviewProcessDomain(long interviewid, long lock_id, String stage1, String stage2, String stage3,
-			String i_status) {
+			String i_status) 
+	{
 		super();
 		this.interviewid = interviewid;
 		this.lock_id = lock_id;
@@ -30,9 +33,11 @@ public class InterviewProcessDomain {
 		this.stage3 = stage3;
 		this.i_status = i_status;
 	}
+	
 	public long getInterviewid() {
 		return interviewid;
 	}
+	
 	public void setInterviewid(long interviewid) {
 		this.interviewid = interviewid;
 	}

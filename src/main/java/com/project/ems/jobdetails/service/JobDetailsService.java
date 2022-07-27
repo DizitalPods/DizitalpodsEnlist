@@ -2,12 +2,8 @@ package com.project.ems.jobdetails.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.project.ems.jobdetails.domain.ClientsDomain;
 import com.project.ems.jobdetails.domain.JobDetailsDomain;
 import com.project.ems.jobdetails.repository.ClientsRepository;
@@ -18,11 +14,11 @@ import com.project.ems.jobdetails.repository.JobDetailsRepo;
 public class JobDetailsService {
 	@Autowired
 	private JobDetailsRepo repo;
+	
 	@Autowired
 	private ClientsRepository crepo;
 	
-	@Autowired
-	private JobDetailsDomain jd;
+	String clientname =null;
 	
 	public List<JobDetailsDomain> listAll()
 	{
@@ -30,39 +26,45 @@ public class JobDetailsService {
 		return repo.findAll();
 	}
 	
-	public void save(JobDetailsDomain jobdetails) {
+	public void save(JobDetailsDomain jd) {
 		if(jd.getClientname().equals("Adobe"))
 		{
-			ClientsDomain cd = crepo.findBycname(jd.getClientname());
+			clientname =jd.getClientname();
+			
+			ClientsDomain cd = crepo.findBycname(clientname);
 			jd.setClientid(cd.getClno());
 		}
 		else if(jd.getClientname().equals("TCS"))
 		{
-			ClientsDomain cd = crepo.findBycname(jd.getClientname());
+			clientname =jd.getClientname();
+			ClientsDomain cd = crepo.findBycname(clientname);
 			jd.setClientid(cd.getClno());
 		}
 		
-		repo.save(jobdetails);
+		repo.save(jd);
 	}
 	
 	
-	public List<String> listjc(@PathVariable String input)
+	public List<String> listjc(String input)
 	{
 		List<JobDetailsDomain> lj =null;
 		List<String> l=null;
 		String jt = null;
 		if(input.equals("y"))
 		{
-			jd.setRoledisplay("y");
+			
 			 l=new ArrayList<String>();
 			 lj = repo.findAll();
 			 for(JobDetailsDomain j:lj)
 			 {
+				j.setRoledisplay("y");
 				jt= j.getJobtitle();
 				long clientid = j.getClientid();
 				 ClientsDomain cd = crepo.findById(clientid).get();
 				      String cname = cd.getCname();
-				      l.add(jt+cname);
+				   String result=   jt+"-"+cname;
+				      
+				      l.add(result);
 				 
 			 }
 			 return l;

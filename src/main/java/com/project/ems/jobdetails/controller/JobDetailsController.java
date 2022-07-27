@@ -1,6 +1,5 @@
 package com.project.ems.jobdetails.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class JobDetailsController {
 		return service.get(jobid);	
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/saveJob")
 	public void addDetails(@RequestBody JobDetailsDomain jd)
 	{
 		service.save(jd);
@@ -75,6 +74,13 @@ public class JobDetailsController {
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@GetMapping("/ljc/{input}")
+	public ResponseEntity<List<String>> getLjc(@PathVariable String input)
+	{
+		List<String> listjc = service.listjc(input);
+		return new ResponseEntity<List<String>>(listjc,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{jobid}")

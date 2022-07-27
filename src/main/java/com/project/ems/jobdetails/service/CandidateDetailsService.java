@@ -27,9 +27,10 @@ public class CandidateDetailsService {
     @Autowired
    	private LockCandidateRepo lrepo;
     
-    @Autowired
-    private  JobDetailsDomain js;
+    
+    
 
+    
 	
 	public List<CandidateDetailsDomain> listAll()
 	{
@@ -44,19 +45,22 @@ public class CandidateDetailsService {
 		      String fid = fd.getId();
 		      if(fid!=null)
 		      {
-		      candidatedetails.setFid(fid);      
+		         candidatedetails.setFid(fid);      
 		      }
 		      
 		      CandidateDetailsDomain cd = repo.save(candidatedetails);
 		     
-		      if(js.getRoledisplay().equals("y")&& cd!=null)
+		      if(candidatedetails.getStatus()!=null && cd!=null )
+		    	  
 		      {	  
 		    	  LockCandidateDomain ld=new LockCandidateDomain();
 		    	     
 		    	     ld.setLock_status("y");
 		    	     ld.setCno(cd.getCno());
 		          
-		          lrepo.save(ld);
+		             LockCandidateDomain lc = lrepo.save(ld);
+		             cd.setLock_id(lc.getLock_id());
+		             repo.save(cd);
 		      
 		      
 		      
@@ -86,41 +90,14 @@ public class CandidateDetailsService {
 	
 	
 	
-	public boolean editCandidateDetails(CandidateDetailsDomain newCandidateDetails,long cno) {
+	public CandidateDetailsDomain editCandidateDetails(long cno) {
 
 		CandidateDetailsDomain existingCandidateDetails= repo.findById(cno).get();
 
 
 
 
-		 if(existingCandidateDetails!=null)
-		{
-			
-			existingCandidateDetails.setFname(newCandidateDetails.getFname());
-			existingCandidateDetails.setLname(newCandidateDetails.getLname());
-			existingCandidateDetails.setPno(newCandidateDetails.getPno());
-			
-			existingCandidateDetails.setEmail(newCandidateDetails.getEmail());
-			existingCandidateDetails.setTechskills(newCandidateDetails.getTechskills());
-			
-			existingCandidateDetails.setTotalexp(newCandidateDetails.getTotalexp());
-			
-			
-			
-			existingCandidateDetails.setLinkedinid(newCandidateDetails.getLinkedinid());
-			
-			existingCandidateDetails.setCreatedon(newCandidateDetails.getCreatedon());
-			existingCandidateDetails.setCreatedby(newCandidateDetails.getCreatedby());
-			existingCandidateDetails.setUpdatedon(newCandidateDetails.getUpdatedon());
-			existingCandidateDetails.setUpdatedby(newCandidateDetails.getUpdatedby());
-			
-		       repo.save(existingCandidateDetails);
-			return true;
-		} 
-		else
-		{
-			return false;
-		}
+		 return existingCandidateDetails;
 
 
 	}

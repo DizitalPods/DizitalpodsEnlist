@@ -18,6 +18,14 @@ public class ClientsDomain {
 	private String mail;
 	private String address;
 	private String location;
+	
+	
+	
+	
+	public ClientsDomain() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public long getClno() {
 		return clno;
 	}
@@ -54,16 +62,7 @@ public class ClientsDomain {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public ClientsDomain(long clno, String cname, String principlecontact, String mail, String address,
-			String location) {
-		super();
-		this.clno = clno;
-		this.cname = cname;
-		this.principlecontact = principlecontact;
-		this.mail = mail;
-		this.address = address;
-		this.location = location;
-	}
+	
 	
 	
 
