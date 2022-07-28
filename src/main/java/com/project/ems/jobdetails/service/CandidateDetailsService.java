@@ -28,11 +28,7 @@ public class CandidateDetailsService {
    	private LockCandidateRepo lrepo;
     
     
-    
-
-    
-	
-	public List<CandidateDetailsDomain> listAll()
+ public List<CandidateDetailsDomain> listAll()
 	{
 		return repo.findAll();
 	}
@@ -40,6 +36,14 @@ public class CandidateDetailsService {
 	
 	public boolean save(CandidateDetailsDomain candidatedetails) {
 		
+		          String domain = candidatedetails.getDomain();
+		          
+		          String[] str = domain.split("-", 2);
+		          
+		          candidatedetails.setDomain(str[0]);
+		          
+		          
+		                 
               List<FileDB> l = frepo.findAll();
 		      FileDB fd = l.get(l.size()-1);
 		      String fid = fd.getId();
@@ -50,17 +54,19 @@ public class CandidateDetailsService {
 		      
 		      CandidateDetailsDomain cd = repo.save(candidatedetails);
 		     
-		      if(candidatedetails.getStatus()!=null && cd!=null )
+		      if(candidatedetails.getDomain()!=null && cd!=null )
 		    	  
 		      {	  
+		    	  cd.setLockedstatus("y");
+		    	  repo.save(cd);
 		    	  LockCandidateDomain ld=new LockCandidateDomain();
 		    	     
-		    	     ld.setLock_status("y");
+		    	     
 		    	     ld.setCno(cd.getCno());
 		          
 		             LockCandidateDomain lc = lrepo.save(ld);
-		             cd.setLock_id(lc.getLock_id());
-		             repo.save(cd);
+		             
+		             
 		      
 		      
 		      

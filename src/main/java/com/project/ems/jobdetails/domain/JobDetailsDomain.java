@@ -14,36 +14,9 @@ public class JobDetailsDomain {
 	private long jobid;
 	private String jobtitle;
 	private String domain;
+	private String  workremotely;
 	private String role;
-	private String roledisplay;
-	private String clientname;
-	
-	public String getClientname() {
-		return clientname;
-	}
-
-	public void setClientname(String clientname) {
-		this.clientname = clientname;
-	}
-
-	public String getRoledisplay() {
-		return roledisplay;
-	}
-
-	public void setRoledisplay(String roledisplay) {
-		this.roledisplay = roledisplay;
-	}
-
-	private long clientid;
-	
-	public long getClientid() {
-		return clientid;
-	}
-
-	public void setClientid(long l) {
-		this.clientid = l;
-	}
-
+	private String client;
 	private String techskills;
 	private String exprange;
 	private String jobtype;
@@ -56,20 +29,30 @@ public class JobDetailsDomain {
 	private String assignedon;
 	private String assignedby;
 	
+	private String roledisplay;
+	
+	
+
+	
+
+	
+
+	
+	
 	public JobDetailsDomain() 
 	{
 		super();
 	}
 	
-	public JobDetailsDomain(long jobid, String jobtitle, String domain, String role, long clientid, String techskills,
+	public JobDetailsDomain(long jobid, String jobtitle, String domain, String role, String techskills,
 			String exprange, String jobtype, String jobdesc, String salaryrange, String openpositions, String joinedby,
-			String createdby, String createdon, String assignedon, String assignedby) {
+			String createdby,String  workremotely, String createdon, String assignedon, String assignedby) {
 		super();
 		this.jobid = jobid;
 		this.jobtitle = jobtitle;
 		this.domain = domain;
 		this.role = role;
-		this.clientid = clientid;
+		this.workremotely=  workremotely;
 		this.techskills = techskills;
 		this.exprange = exprange;
 		this.jobtype = jobtype;
@@ -81,6 +64,29 @@ public class JobDetailsDomain {
 		this.createdon = createdon;
 		this.assignedon = assignedon;
 		this.assignedby = assignedby;
+	}
+	public String getRoledisplay() {
+		return roledisplay;
+	}
+
+	public void setRoledisplay(String roledisplay) {
+		this.roledisplay = roledisplay;
+	}
+
+	public String getWorkremotely() {
+		return workremotely;
+	}
+
+	public void setWorkremotely(String workremotely) {
+		this.workremotely = workremotely;
+	}
+
+	public String getClient() {
+		return client;
+	}
+
+	public void setClient(String client) {
+		this.client = client;
 	}
 
 	public long getJobid() {
@@ -179,7 +185,7 @@ public class JobDetailsDomain {
 	@Override
 	public String toString() {
 		return "JobDetailsDomain [jobid=" + jobid + ", jobtitle=" + jobtitle + ", domain=" + domain + ", role=" + role
-				+ ", client=" + clientid + ", techskill=" + techskills + ", exprange=" + exprange + ", jobtype=" + jobtype
+				+ ", client=" + client + ", techskill=" + techskills + ", exprange=" + exprange + ", jobtype=" + jobtype
 				+ ", jobdesc=" + jobdesc + ", salaryrange=" + salaryrange + ", openposition=" + openpositions
 				+ ", joinedby=" + joinedby + ", createdby=" + createdby + ", createdon=" + createdon + ", assignedon="
 				+ assignedon + ", assignedby=" + assignedby + "]";

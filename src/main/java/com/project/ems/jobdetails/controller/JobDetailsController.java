@@ -22,17 +22,13 @@ public class JobDetailsController {
 	@Autowired
 	private JobDetailsService service;
 	
-	@GetMapping("/")
+	@GetMapping("/alljobs")
 	public List<JobDetailsDomain> listAll()
 	{
 		return service.listAll();
 	}
-	@GetMapping("/jc/{input}")
-	public ResponseEntity<List<String>> listjc(@PathVariable String input)
-	{
-		List<String> listj = service.listjc(input);
-		return new ResponseEntity<List<String>>(listj,HttpStatus.OK);
-	}
+	
+	
 	
 	@GetMapping("/{jobid}")
 	public JobDetailsDomain getTask(@PathVariable long jobid)
@@ -40,11 +36,13 @@ public class JobDetailsController {
 		return service.get(jobid);	
 	}
 	
+	
 	@PostMapping("/saveJob")
 	public void addDetails(@RequestBody JobDetailsDomain jd)
 	{
 		service.save(jd);
 	}
+	
 	
 	@PutMapping(value="/{jobid}") 
 	public ResponseEntity<?> editJobDetails(@RequestBody JobDetailsDomain newjobDetails, @PathVariable long jobid)
@@ -76,10 +74,10 @@ public class JobDetailsController {
 		}
 	}
 	
-	@GetMapping("/ljc/{input}")
-	public ResponseEntity<List<String>> getLjc(@PathVariable String input)
+	@GetMapping("/ljc")
+	public ResponseEntity<List<String>> getLjc()
 	{
-		List<String> listjc = service.listjc(input);
+		List<String> listjc = service.listjc();
 		return new ResponseEntity<List<String>>(listjc,HttpStatus.OK);
 	}
 	

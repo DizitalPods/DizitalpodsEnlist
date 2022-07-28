@@ -12,6 +12,22 @@
 
 
 	<script>
+	
+	$.ajax({
+		url : "/clients",
+		success : function(data) {
+			
+			var select = '';
+			$.each(data, function(key, value) {
+				select += '<option val=' + data[key] + ' id="opsn">'
+						+ data[key] + '</option>';
+				console.log(data[key]);
+			})
+			$('#client').html(select);
+		},
+
+		type : 'GET',
+	});
 		function save() {
 			var data = {}
 
@@ -23,7 +39,8 @@
 			data["exprange"] = $("#exprange").val();
 			data["jobtype"] = $("#jobtype").val();
 			data["jobdesc"] = $("#jobdesc").val();
-			data["salaryrange"] = $("#salaryrange").val();
+			data["workremotely"]=$("#work").val();
+			data["salaryrange"] = $("#salaryrange1").val()+"-"+$("#salaryrange2").val();
 			data["openpositions"] = $("#openpositions").val();
 			data["joinedby"] = $("#joinedby").val();
 			data["createdby"] = $("#createdby").val();
@@ -32,7 +49,7 @@
 			data["assignedby"] = $("#assignedby").val();
 
 			$.ajax({
-				url: "/",
+				url: "/saveJob",
 				contentType: "application/json",
 				data: JSON.stringify(data),
 				type: "post",
@@ -67,12 +84,17 @@
 			Job Title: <input type="text" id="jobtitle" class="form-control">
 			Domain: <input type="text" id="domain" class="form-control">
 			Role: <input type="text" id="role" class="form-control">
-			Client: <input type="text" id="client" class="form-control">
+			
+			Client: <select id="client"  class="form-control"></select>
+			
 			Technical Skills: <input type="text" id="techskills" class="form-control">
 			Experience: <input type="text" id="exprange" class="form-control">
 			Job Type: <input type="text" id="jobtype" class="form-control">
 			Job Description: <input type="text" id="jobdesc" class="form-control">
-			Salary Range: <input type="text" id="salaryrange" class="form-control">
+		    Remote work:	<input type="checkbox" id="work" value="y"><br>
+			Salary Range: <input type="text" id="salaryrange1" class="form-control">
+			              <spam class="mx-lg-3">to</spam>
+			              <input type="text" id="salaryrange2" class="form-control">
 			Open Positions: <input type="text" id="openpositions" class="form-control">
 			Join by: <input type="text" id="joinedby" class="form-control">
 			Created by: <input type="text" id="createdby" class="form-control">

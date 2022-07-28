@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="icon" type="image/x-icon" href="src/main/resources/images/tab.png">
-    <title>Enlist - CandidateEntry</title>
+    <link rel="icon" type="image/x-icon" href="../images/tab.png">
+    <title>Enlist - EditPage</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,8 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="src/main/resources/css/styles.css" rel="stylesheet">
-
+    <link href="../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -32,8 +31,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="src/main/resources/templates/index.html">
-                <img src="images/enlist logo2.png" />
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+                <img src="../images/enlist logo2.png" />
             </a>
 
             <!-- Divider -->
@@ -41,22 +40,22 @@
 
             <!-- Nav Items -->
             <li class="nav-item active">
-                <a class="nav-link" href="src/main/resources/templates/overview.html">
+                <a class="nav-link" href="../pages/overview.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Overview</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/Inbox.html">
+                <a class="nav-link" href="./Inbox.html">
                     <i class="fas fa-inbox"></i>
                     <span>Inbox</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/CandidateCreate2.html">
+                <a class="nav-link" href="./calendar.html">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Calendar</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/CandidateCreate2.html">
+                <a class="nav-link" href="./Jobposting.html">
                     <i class="fab fa-linkedin"></i>
                     <span>Social Media</span></a>
             </li>
@@ -69,14 +68,14 @@
                 Recruitment
             </div>
 
-
+            <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="./src/main/resources/templates/index.html">
+                <a class="nav-link" href="../index.html">
                     <i class="fas fa-mail-bulk"></i>
                     <span>Job Indent</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./src/main/resources/templates/candidates.html">
+                <a class="nav-link" href="./candidates.html">
                     <i class="fas fa-user-alt"></i>
                     <span>Candidates</span></a>
             </li>
@@ -128,7 +127,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -244,31 +243,42 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid p-lg-0">
+                <div class="container-fluid">
 
                     <!-- Content Row -->
                     <div class="row">
                         <form>
-                            <div class="row bg-image" style="background-image:url('../images/bg3.png');">
-                                <div class="col-lg-6 pr-lg-4 my-lg-5 mx-lg-5 fw-bold">
+                            <div class="row">
+                                <div class="col-lg-6 pr-lg-4">
+                                    <div class="mb-3">
+                                        <label for="email">Job Title </label>
+                                        <input type="email" class="form-control" id="email" placeholder="Java Developer">
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address for shipping updates.
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                      Employee can work remotley
+                                    </label>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_first_name">First Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_first_name" value="" placeholder="Enter First name" required="">
+                                            <label for="department">Department</label>
+                                            <input type="text" class="form-control" id="department" placeholder="" value="Development" required="">
                                             <div class="invalid-feedback">
                                                 Valid Department is required.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_last_name">Last Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_last_name" value="" placeholder="Enter Last name" required="">
+                                            <label for="jobtype">Job type</label>
+                                            <input type="text" class="form-control" id="jobtype" placeholder="" value="Full-Time" required="">
                                             <div class="invalid-feedback">
                                                 Valid Job type is required.
                                             </div>
@@ -276,82 +286,97 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_experience">Experience</label>
-                                            <input type="text" class="form-control" id="candidate_entry_experience" value="" placeholder="Enter Experience years" required="">
+                                            <label for="experience">Experience Level</label>
+                                            <input type="text" class="form-control" id="experience" placeholder="" value="Mid Level" required="">
                                             <div class="invalid-feedback">
                                                 Valid Experience is required.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_phone">Phone</label>
-                                            <input type="tel" class="form-control" id="candidate_entry_phone" value="" placeholder="Enter Phone Number" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
+                                            <label for="jobtype">Salary Range</label>
+                                            <div class="d-flex center align-content-center justify-content-center">
+                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="" required="">
+                                                <spam class="mx-lg-3">to</spam>
+                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="" required="">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="">
-                                                <input type="checkbox" id="flexCheckDefault">
-                                                <label class="" for="flexCheckDefault">Lock Profile</label>
-                                            </div>
-                                            <select class="form-select" id="candidate_entry_positions" name="sellist1">
-                                                <option>javaDeveloper - Adobe</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                              </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_skills">Skills</label>
-                                            <input type="text" class="form-control" id="candidate_entry_skills" value="" placeholder="HTML,CSS,java" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
-                                            </div>
+
 
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_linkedin">LinkedIn Url</label>
-                                            <input type="text" class="form-control" id="candidate_entry_linkedin" value="" placeholder="Enter Linkedin URL" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Department is required.
+                                            <label for="positions">No of Positions</label>
+                                            <input type="text" class="form-control" id="positions" placeholder="" value="Development" required="">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="joining">Date of joining</label>
+                                            <div class="input-group date" id="datepicker">
+                                                <input type="text" class="form-control" id="date" />
+                                                <span class="input-group-append">
+                                                    <span class="input-group-text bg-light d-block">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="desc">Description</label>
+                                        <textarea class="form-control" id="desc" rows="5"></textarea>
+                                    </div>
+                                    <spam><a href="./jobdescription.html" class="text-decoration-none text-dark">Choose from template -></a></spam>
+
+                                </div>
+                                <div class="col-lg-6 px-lg-5">
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="mb-3">
+                                                <label>Assign to</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                     <option selected>Choose</option>
+                                                     <option value="1">One</option>
+                                                     <option value="2">Two</option>
+                                                     <option value="3">Three</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_email">Email</label>
-                                            <input type="email" class="form-control" id="candidate_entry_email" value="" placeholder="Enter Your Email" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
+                                            <!-- <label for="new-client">Client</label>
+                                            <input type="text" class="form-control" id="new-client" placeholder="Name of Client" required=""> -->
+                                            <div class="mb-3">
+                                                <label>Client</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                     <option selected>Choose</option>
+                                                     <option value="1">One</option>
+                                                     <option value="2">Two</option>
+                                                     <option value="3">Three</option>
+                                                </select>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="responsibility">Job Responsibilities</label>
+                                        <textarea class="form-control" id="responsibility" rows="5"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="benefits">Benefits</label>
+                                        <textarea class="form-control" id="benefits" rows="2"></textarea>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label>Resume</label>
-                                            <div class="drop-zone">
-                                                <!-- <input type="file" name="myFile" class="drop-zone__input"> -->
-                                                <div class="upload-button">
-                                                    <div class="file btn btn-lg btn-outline-primary w-70 fw-bold py-2 px-lg-4 pe-auto">
-                                                        BROWSE FILE
-                                                        <input type="file" name="file" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="col-lg-6">
+                                            <button class="btn btn-primary px-3 py-2" px->SAVE</button>
                                         </div>
-                                    </div>
-                                    <div class="database mt-lg-2">
-                                        <button class="btn btn-primary fw-bold">ADD TO DATABASE</button>
+                                        <div class="col-lg-6  d-flex align-content-lg-center justify-content-end">
+                                            <spam class="d-flex align-items-end"><a href="#" class="text-decoration-none text-dark">Post in other job portal -></a></spam>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        <div class="col-lg-6 ">
-
-                        </div>
                     </div>
 
                 </div>
@@ -409,8 +434,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Custom scripts for all pages-->
     <script src="../js/custom.js"></script>
-
-
 
 </body>
 

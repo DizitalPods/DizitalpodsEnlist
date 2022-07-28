@@ -15,51 +15,127 @@ public class CandidateDetailsDomain {
 	private String fname;
 	private String lname;
 	private String pno;
+	private String alternatepno;
     private String role;
-	private String status;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	private String email;
+    private String domain;
+	private String lockedstatus;
+    private String email;
 	private String techskills;
-	
+	private String otherskills;
 	private String totalexp;
 	
 	private String linkedinid;
+	private String prevorgs;
+	private String summary;
+	private String naukariid;
 	
-
+	private String source;
 	private String createdon;
 	private String createdby;
 	private String updatedon;
 	private String updatedby;
 	private String fid;
-	private long lock_id;
-	private long clno;
-	public long getClno() {
-		return clno;
-	}
-
-	public void setClno(long clno) {
-		this.clno = clno;
-	}
-
-	public long getLock_id() {
-		return lock_id;
-	}
-
-	public void setLock_id(long lock_id)
-	{
-		this.lock_id = lock_id;
-	}
-
 	
 	
+	
+	public CandidateDetailsDomain() {
+		super();
+		
+	}
+	
+	public CandidateDetailsDomain(long cno, String fname, String lname, String pno, String alternatepno, String email,
+			String techskills, String otherskills, String totalexp, String prevorgs, String summary, String naukariid,
+			String linkedinid, String source, String createdon, String createdby, String updatedon, String updatedby,
+			String lockedstatus,
+			String role) {
+		super();
+		this.cno = cno;
+		this.fname = fname;
+		this.lname = lname;
+		this.pno = pno;
+		this.alternatepno = alternatepno;
+		this.email = email;
+		this.techskills = techskills;
+		this.otherskills = otherskills;
+		this.totalexp = totalexp;
+		this.prevorgs = prevorgs;
+		this.summary = summary;
+		this.naukariid = naukariid;
+		this.linkedinid = linkedinid;
+		this.source = source;
+		this.createdon = createdon;
+		this.createdby = createdby;
+		this.updatedon = updatedon;
+		this.updatedby = updatedby;
+		this.lockedstatus = lockedstatus;
+		this.role=role;
+	}
+	
+	
+public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
+public String getLockedstatus() {
+		return lockedstatus;
+	}
+
+	public void setLockedstatus(String lockedstatus) {
+		this.lockedstatus = lockedstatus;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getPrevorgs() {
+		return prevorgs;
+	}
+
+	public void setPrevorgs(String prevorgs) {
+		this.prevorgs = prevorgs;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getNaukariid() {
+		return naukariid;
+	}
+
+	public void setNaukariid(String naukariid) {
+		this.naukariid = naukariid;
+	}
+
+	public String getOtherskills() {
+		return otherskills;
+	}
+
+	public void setOtherskills(String otherskills) {
+		this.otherskills = otherskills;
+	}
+
+	public String getAlternatepno() {
+		return alternatepno;
+	}
+
+	public void setAlternatepno(String alternatepno) {
+		this.alternatepno = alternatepno;
+	}
+
 	public String getFid() {
 		return fid;
 	}
@@ -68,10 +144,7 @@ public class CandidateDetailsDomain {
 		this.fid = fid;
 	}
 
-	public CandidateDetailsDomain() {
-		super();
-		
-	}
+	
 	public String getRole() {
 		return role;
 	}
@@ -80,31 +153,7 @@ public class CandidateDetailsDomain {
 		this.role = role;
 	}
 
-	public CandidateDetailsDomain(long cno, String fname, String lname, String pno, String email,
-			String techskills,  String totalexp,
-			String linkedinid,  String createdon, String createdby, String updatedon, String updatedby,
-			String role) {
-		super();
-		this.cno = cno;
-		this.fname = fname;
-		this.lname = lname;
-		this.pno = pno;
-		
-		this.email = email;
-		this.techskills = techskills;
-		
-		this.totalexp = totalexp;
-		
-		
-		this.linkedinid = linkedinid;
-		
-		this.createdon = createdon;
-		this.createdby = createdby;
-		this.updatedon = updatedon;
-		this.updatedby = updatedby;
-		
-		this.role=role;
-	}
+	
 
 	public long getCno() {
 		return cno;
@@ -211,7 +260,7 @@ public class CandidateDetailsDomain {
 	public void setUpdatedby(String updatedby) {
 		this.updatedby = updatedby;
 	}
-
+	
 	
 
 	

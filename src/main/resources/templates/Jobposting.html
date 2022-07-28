@@ -9,8 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="icon" type="image/x-icon" href="src/main/resources/images/tab.png">
-    <title>Enlist - CandidateEntry</title>
+    <link rel="icon" type="image/x-icon" href="../images/tab.png">
+    <title>Enlist - JobPosting</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,8 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="src/main/resources/css/styles.css" rel="stylesheet">
-
+    <link href="../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -32,8 +37,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="src/main/resources/templates/index.html">
-                <img src="images/enlist logo2.png" />
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+                <img src="../images/enlist logo2.png" />
             </a>
 
             <!-- Divider -->
@@ -41,22 +46,22 @@
 
             <!-- Nav Items -->
             <li class="nav-item active">
-                <a class="nav-link" href="src/main/resources/templates/overview.html">
+                <a class="nav-link" href="../pages/overview.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Overview</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/Inbox.html">
+                <a class="nav-link" href="./Inbox.html">
                     <i class="fas fa-inbox"></i>
                     <span>Inbox</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/CandidateCreate2.html">
+                <a class="nav-link" href="./calendar.html">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Calendar</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/src/main/resources/templates/CandidateCreate2.html">
+                <a class="nav-link" href="./Jobposting.html">
                     <i class="fab fa-linkedin"></i>
                     <span>Social Media</span></a>
             </li>
@@ -68,15 +73,14 @@
             <div class="sidebar-heading">
                 Recruitment
             </div>
-
-
+            <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="./src/main/resources/templates/index.html">
+                <a class="nav-link" href="../index.html">
                     <i class="fas fa-mail-bulk"></i>
                     <span>Job Indent</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./src/main/resources/templates/candidates.html">
+                <a class="nav-link" href="./candidates.html">
                     <i class="fas fa-user-alt"></i>
                     <span>Candidates</span></a>
             </li>
@@ -128,7 +132,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -251,107 +255,127 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid p-lg-0">
-
+                <div class="container-fluid">
                     <!-- Content Row -->
-                    <div class="row">
-                        <form>
-                            <div class="row bg-image" style="background-image:url('../images/bg3.png');">
-                                <div class="col-lg-6 pr-lg-4 my-lg-5 mx-lg-5 fw-bold">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_first_name">First Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_first_name" value="" placeholder="Enter First name" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Department is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_last_name">Last Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_last_name" value="" placeholder="Enter Last name" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
-                                            </div>
-                                        </div>
+
+                    <div class="container">
+                        <div class="row border bg-body px-3 rounded-3 w-75">
+                            <div class="col-5">
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">Development</label>
+                                    <h5 class="jobposting_topbody_content">Java Developer</h5>
+                                </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Job Type</label>
+                                    <h5 class="jobposting_topbody_content">Full-Time</h5>
+                                </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Work type</label>
+                                    <h5 class="jobposting_topbody_content">Remote</h5>
+                                </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Experience</label>
+                                    <h5 class="jobposting_topbody_content">Fresher - 2 Years</h5>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="my-3 d-flex align-items-center">
+                                    <div class="date_of_joining">
+                                        <label class="m-0 jobposting_topbody_label">Date of joining</label>
+                                        <h5 class="jobposting_topbody_content">12-03-2022</h5>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_experience">Experience</label>
-                                            <input type="text" class="form-control" id="candidate_entry_experience" value="" placeholder="Enter Experience years" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Experience is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_phone">Phone</label>
-                                            <input type="tel" class="form-control" id="candidate_entry_phone" value="" placeholder="Enter Phone Number" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
-                                            </div>
-                                        </div>
+
+                                    <div class="download-icon">
+                                        <a href="" class="text-decoration-none text-dark"><i class="fa-solid fa-download"></i></a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="">
-                                                <input type="checkbox" id="flexCheckDefault">
-                                                <label class="" for="flexCheckDefault">Lock Profile</label>
-                                            </div>
-                                            <select class="form-select" id="candidate_entry_positions" name="sellist1">
-                                                <option>javaDeveloper - Adobe</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                              </select>
+                                </div>
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">No of Positions</label>
+                                    <h5 class="jobposting_topbody_content">100</h5>
+                                </div>
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">Job description</label>
+                                    <p class="jobposting_topbody_content">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae. At nos hinc posthac.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="social_postings">
+                            <h3>Social Postins</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="../images/dp1.png" alt="Dizitalpods">
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_skills">Skills</label>
-                                            <input type="text" class="form-control" id="candidate_entry_skills" value="" placeholder="HTML,CSS,java" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
-                                            </div>
+                                        <!-- <div class="md-form md-outline input-with-post-icon datepicker" id="accLabels">
+                                            <input placeholder="Select date" type="text" id="accessibility-example" class="form-control">
+                                            <label for="accessibility-example">Try me...</label>
+                                            <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                                        </div> -->
+                                        <div class="addingsection text-center mt-2">
+                                            <button id="addsection" class="border-0 bg-body "><i class="fa-solid fa-circle-plus fs-4"></i></button>
+                                        </div>
+                                        <div id="add-date">
+                                            <!-- <div class="input-group date" id="datepicker">
+                                                <input type="text" class="form-control" id="date" />
+                                                <span class="input-group-append">
+                                                <span class="input-group-text bg-light d-block">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                </span>
+                                            </div> -->
 
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_linkedin">LinkedIn Url</label>
-                                            <input type="text" class="form-control" id="candidate_entry_linkedin" value="" placeholder="Enter Linkedin URL" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Department is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="candidate_entry_email">Email</label>
-                                            <input type="email" class="form-control" id="candidate_entry_email" value="" placeholder="Enter Your Email" required="">
-                                            <div class="invalid-feedback">
-                                                Valid Job type is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label>Resume</label>
-                                            <div class="drop-zone">
-                                                <!-- <input type="file" name="myFile" class="drop-zone__input"> -->
-                                                <div class="upload-button">
-                                                    <div class="file btn btn-lg btn-outline-primary w-70 fw-bold py-2 px-lg-4 pe-auto">
-                                                        BROWSE FILE
-                                                        <input type="file" name="file" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="database mt-lg-2">
-                                        <button class="btn btn-primary fw-bold">ADD TO DATABASE</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <div class="col-lg-6 ">
-
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="../images/linkedin1.png" alt="LinkedIn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="../images/naukri1.png" alt="Naukri">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="../images/insta1.png" alt="Instagram">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="../images/fb1.png" alt="Facebook">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- <div class="row">
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 20%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 20%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -415,3 +439,24 @@
 </body>
 
 </html>
+
+
+
+<!-- <div class="row no-gutters align-items-center">
+                                                        <div class="flow position-absolute d-lg-flex justify-content-end align-content-center ">
+                                                            <a href="#" class="edit-profile  "><i class="fa-solid fa-pen"></i></a>
+                                                        </div>
+                                                        <div class="image-section">
+                                                            <img src="../images/linkedin.png" alt="Linked-In" width="100%">
+                                                        </div>
+                                                        <div class="upload-button">
+                                                            <div class="file btn btn-lg btn-outline-info border-1 w-100">
+                                                                Upload Photo
+                                                                <input type="file" name="file" />
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-button">
+                                                            <button class="btn btn-primary w-100 my-lg-3">POST</button>
+                                                        </div>
+                                                </div> -->
