@@ -28,8 +28,10 @@ public class FileController {
   private FileStorageService storageService;
   @Autowired
   CandidateDetailsService cs;
+  
+  
   @PostMapping("/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("fi") MultipartFile file) {
+  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam ("fi") MultipartFile file) {
     String message = "";
     try {
       storageService.store(file);

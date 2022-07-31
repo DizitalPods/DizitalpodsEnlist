@@ -19,6 +19,100 @@
     <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <script>
+    function uploading()
+    {
+	
+	     var fi=$("#f").val();
+	
+        $.ajax({
+				url: "/upload/fi",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				type: "post",
+				success: function (data) {
+
+				
+					alert("Inserted Successfully" + data);
+
+				},
+				error: function (e) {
+					alert('error', e);
+				}
+			});
+
+     }
+    
+    function Enabledchk(pl)
+	{
+		var ddl=document.getElementById("ls");
+		ddl.disabled=pl.checked ? false:true;
+		if(!ddl.disabled)
+		{
+			ddl.focus();
+		}
+	}
+	
+	$.ajax({
+		url :"/ljc" ,
+		success : function(data) {
+			
+			var select = '<option val=select>--select--</option>';
+			$.each(data, function(key, value) {
+				select += '<option val=' + data[key] + ' id="opsn">'
+						+ data[key] + '</option>';
+						
+				console.log(data[key]);
+			})
+			$('#ls').html(select);
+		},
+
+		type : 'GET',
+	});
+    
+    function save()
+  {
+	
+	
+	        var data = {}
+
+			data["fname"] = $("#fname").val();
+			data["lname"] = $("#lname").val();
+			data["pno"] = $("#pno").val();
+			
+			data["email"] = $("#email").val();
+			data["techskills"] = $("#techskills").val();
+			
+			data["totalexp"] = $("#totalexp").val();
+			
+			
+			data["linkedinid"] = $("#linkedinid").val();
+			data["domain"]=$("#ls").val();
+			
+			
+			
+			$.ajax({
+				url: "/candid",
+				contentType: "application/json",
+				data: JSON.stringify(data),
+				type: "post",
+				success: function (data) {
+
+				
+					alert("Inserted Successfully" + data);
+
+				},
+				error: function (e) {
+					alert('error', e);
+				}
+			});
+			
+		}	
+    
+    </script>
 
 
 </head>
@@ -255,20 +349,20 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <form>
+                        
                             <div class="row bg-image" style="background-image:url('../images/bg3.png');">
                                 <div class="col-lg-6 pr-lg-4 my-lg-5 mx-lg-5 fw-bold">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_first_name">First Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_first_name" value="" placeholder="Enter First name" required="">
+                                            <input type="text" class="form-control" id="fname" value="" placeholder="Enter First name" required="">
                                             <div class="invalid-feedback">
                                                 Valid Department is required.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_last_name">Last Name</label>
-                                            <input type="text" class="form-control" id="candidate_entry_last_name" value="" placeholder="Enter Last name" required="">
+                                            <input type="text" class="form-control" id="lname" value="" placeholder="Enter Last name" required="">
                                             <div class="invalid-feedback">
                                                 Valid Job type is required.
                                             </div>
@@ -277,14 +371,14 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_experience">Experience</label>
-                                            <input type="text" class="form-control" id="candidate_entry_experience" value="" placeholder="Enter Experience years" required="">
+                                            <input type="text" class="form-control" id="totalexp" value="" placeholder="Enter Experience years" required="">
                                             <div class="invalid-feedback">
                                                 Valid Experience is required.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_phone">Phone</label>
-                                            <input type="tel" class="form-control" id="candidate_entry_phone" value="" placeholder="Enter Phone Number" required="">
+                                            <input type="tel" class="form-control" id="pno" value="" placeholder="Enter Phone Number" required="">
                                             <div class="invalid-feedback">
                                                 Valid Job type is required.
                                             </div>
@@ -292,21 +386,24 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <div class="">
-                                                <input type="checkbox" id="flexCheckDefault">
+                                            
+                                                <input type="checkbox" id="pl" onclick="Enabledchk(this)"><br>
                                                 <label class="" for="flexCheckDefault">Lock Profile</label>
-                                            </div>
-                                            <select class="form-select" id="candidate_entry_positions" name="sellist1">
-                                                <option>javaDeveloper - Adobe</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                              </select>
+                                            
+                                            
+			
+			                                <select id="ls" disabled="disabled" class="custom-select form-control">
+			                                
+			                                
+			                                </select>
+			                                
+			                                
+			                                
+			                                
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_skills">Skills</label>
-                                            <input type="text" class="form-control" id="candidate_entry_skills" value="" placeholder="HTML,CSS,java" required="">
+                                            <input type="text" class="form-control" id="techskills" value="" placeholder="HTML,CSS,java" >
                                             <div class="invalid-feedback">
                                                 Valid Job type is required.
                                             </div>
@@ -316,14 +413,14 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_linkedin">LinkedIn Url</label>
-                                            <input type="text" class="form-control" id="candidate_entry_linkedin" value="" placeholder="Enter Linkedin URL" required="">
+                                            <input type="text" class="form-control" id="linkedinid" value="" placeholder="Enter Linkedin URL" required="">
                                             <div class="invalid-feedback">
                                                 Valid Department is required.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="candidate_entry_email">Email</label>
-                                            <input type="email" class="form-control" id="candidate_entry_email" value="" placeholder="Enter Your Email" required="">
+                                            <input type="email" class="form-control" id="email" value="" placeholder="Enter Your Email" required="">
                                             <div class="invalid-feedback">
                                                 Valid Job type is required.
                                             </div>
@@ -331,24 +428,32 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
-                                            <label>Resume</label>
-                                            <div class="drop-zone">
+                                            
+                                            
                                                 <!-- <input type="file" name="myFile" class="drop-zone__input"> -->
-                                                <div class="upload-button">
-                                                    <div class="file btn btn-lg btn-outline-primary w-70 fw-bold py-2 px-lg-4 pe-auto">
-                                                        BROWSE FILE
-                                                        <input type="file" name="file" />
-                                                    </div>
-                                                </div>
+                                                
+                                                    
+                                                       <form method="post" action="/upload" enctype="multipart/form-data"> 
+                                                        <input type="file" name="fi" />
+                                                        <button   class="btn btn-primary fw-bold" type="submit" >upload</button>
+                                                       </form>
+                                                
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                                       
                                     <div class="database mt-lg-2">
-                                        <button class="btn btn-primary fw-bold">ADD TO DATABASE</button>
+                                       <button class="btn btn-primary fw-bold"  type="submit" onclick="save();">ADD TO DATABASE</button>
                                     </div>
+                                    
                                 </div>
                             </div>
-                        </form>
+                            
+                        
+                        
+                        
+                        
                         <div class="col-lg-6 ">
 
                         </div>
@@ -410,7 +515,15 @@
     <!-- Custom scripts for all pages-->
     <script src="../js/custom.js"></script>
 
+<!-- Labels -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+<!-- Include Dexie -->
+<script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 
 </body>
 

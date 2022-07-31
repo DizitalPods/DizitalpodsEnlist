@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Add Candidate Detail</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function save() {
+        var data = {}
+
+        data["fname"] = $("#fname").val();
+        data["lname"] = $("#lname").val();
+        data["pno"] = $("#pno").val();
+        
+        data["email"] = $("#email").val();
+        data["techskills"] = $("#techskills").val();
+        
+        data["totalexp"] = $("#totalexp").val();
+        
+        
+        data["linkedinid"] = $("#linkedinid").val();
+        data["source"] = $("#source").val();
+        data["createdby"] = $("#createdby").val();
+        data["createdon"] = $("#createdon").val();
+        data["updatedon"] = $("#updatedon").val();
+        data["updatedby"] = $("#updatedby").val();
+        data["domain"]=$("#ls").val();
+        
+
+        $.ajax({
+            url: "http://localhost:8096/candid ",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            type: "post",
+            success: function (data) {
+
+                window.location.href = '/CandidateDisplay';
+                alert("Inserted Successfully" + data);
+
+            },
+            error: function (e) {
+                alert('error', e);
+            }
+        });
+    }
+
+
+</script>
+
+</head>
+<body>
+    
+    
+
+Full Name: <input type="text" id="fname" class="form-control">
+			Last Name: <input type="text" id="lname" class="form-control">
+			Phone: <input type="text" id="pno" class="form-control">
+			Email: <input type="text" id="email" class="form-control">
+			Technical Skills: <input type="text" id="techskills" class="form-control">
+			
+			Total Experience: <input type="text" id="totalexp" class="form-control">
+            Linkedin: <input type="text" id="linkedinid" class="form-control">
+            <input type="submit" value="Add" onclick="save();" class="btn btn-success">
+
+
+
+
+
+
+</body>
+</html>

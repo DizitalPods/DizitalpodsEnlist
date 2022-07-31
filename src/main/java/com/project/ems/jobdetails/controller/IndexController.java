@@ -6,6 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
+	
+	@RequestMapping("/h")
+	   public String dis()
+	   {
+		   return "candidatentry";
+	  }
+	@RequestMapping("/index")
+	   public String disp()
+	   {
+		   return "index";
+	  }
 	@RequestMapping("/JobDisplay")
 	   public String display()
 	   {
